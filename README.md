@@ -1,1 +1,2 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+アイコン https://fontawesome.com/icons?d=gallery&p=1
+スタイル https://tailwindcss-ja.entap.app
