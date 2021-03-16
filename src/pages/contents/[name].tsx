@@ -14,6 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import MeetEditableBlock from '../../components/Organisms/MeetEditableBlock'
 import ImageSelectIcon from '../../components/Molecules/ImageSelectIcon'
+import ContentEditable from 'react-contenteditable'
+import { v4 as uuidv4 } from 'uuid'
 
 const Contents = () => {
 	const router = useRouter()
@@ -23,7 +25,8 @@ const Contents = () => {
 	useEffect(() => {
 		console.log('name: ', name,)
 		console.log(state)
-		dispatch({ type: 'GET_BY_NAME', payload: { name: name as string } })
+		// dispatch({ type: 'GET_BY_NAME', payload: { name: name as string } })
+		dispatch({ type: 'GET_BY_ID', payload: { id: name as string } })
 	}, [name])
 
 	// useEffect(() => {
@@ -42,19 +45,19 @@ const Contents = () => {
 
 
 	const addHeaderBlockHandler = (index) => {
-		const newBlock: HeaderBlock = { id: '', html: '', tag: 'HEADER' }
+		const newBlock: HeaderBlock = { id: uuidv4(), html: '', tag: 'HEADER' }
 		const newData = state.current
 		newData.blocks.splice(index + 1, 0, newBlock)
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
 	const addCommandBlockHandler = (index) => {
 		const newBlock: CommandBlock = {
-			id: '',
+			id: uuidv4(),
 			tag: 'COMMAND',
 			command: ''
 		}
@@ -63,13 +66,13 @@ const Contents = () => {
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
 	const addHeightBlockHandler = (index) => {
 		const newBlock: HeightBlock = {
-			id: '',
+			id: uuidv4(),
 			tag: 'HEIGHT',
 			height: '10'
 		}
@@ -78,13 +81,13 @@ const Contents = () => {
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
 	const addWeightBlockHandler = (index) => {
 		const newBlock: WeightBlock = {
-			id: '',
+			id: uuidv4(),
 			tag: 'WEIGHT',
 			weight: '10'
 		}
@@ -94,13 +97,13 @@ const Contents = () => {
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
 	const addMeetBlockHandler = (index) => {
 		const newBlock: MeetBlock = {
-			id: '',
+			id: uuidv4(),
 			tag: 'MEET',
 			meet: '0'
 		}
@@ -109,13 +112,13 @@ const Contents = () => {
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
 	const addUrlBlockHandler = (index, url, title, description, image) => {
 		const newBlock: UrlBlock = {
-			id: '',
+			id: uuidv4(),
 			tag: 'URL',
 			url: url,
 			image: image,
@@ -129,7 +132,7 @@ const Contents = () => {
 
 		dispatch({
 			type: 'UPDATE_BY_NAME',
-			payload: { name: name as string, id: state.current.id, data: newData }
+			payload: { id: state.current.id, data: newData }
 		})
 	}
 
@@ -140,10 +143,10 @@ const Contents = () => {
 			}
 			return v
 		})
+		console.log(newBlocks)
 		dispatch({
 			type: 'UPDATE_BY_NAME',
 			payload: {
-				name: name as string,
 				id: state.current.id,
 				data: {
 					...state.current,
@@ -158,11 +161,23 @@ const Contents = () => {
 		dispatch({
 			type: 'UPDATE_BY_NAME',
 			payload: {
-				name: name as string,
 				id: state.current.id,
 				data: {
 					...state.current,
 					image: image
+				}
+			}
+		})
+	}
+
+	const updateNameHandler = (name) => {
+		dispatch({
+			type: 'UPDATE_BY_NAME',
+			payload: {
+				id: state.current.id,
+				data: {
+					...state.current,
+					name: name,
 				}
 			}
 		})
@@ -176,14 +191,17 @@ const Contents = () => {
 				<>
 					<div className='h-96 w-full bg-cover' style={{ backgroundImage: `url(${state.current.image})`}}>
 						<header className='container flex justify-between'>
-							<Link href='/home/'>
-								<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20' />
-							</Link>
+							<div onClick={() => dispatch({type: 'UPLOAD_DATA', payload: {data: state.current}})}>
+								<Link href='/home/'>
+									<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20' />
+								</Link>
+							</div>
 							<ImageSelectIcon handleChange={imageLoadHandler}/>
 						</header>
 					</div>
 					<div className='mt-8'>
-						<h1 className='text-5xl font-bold text-center'>{state.current.name}</h1>
+						{/*<h1 className='text-5xl font-bold text-center'>{state.current.name}</h1>*/}
+						<ContentEditable className='text-5xl font-bold text-center' html={state.current.name} onChange={(e) => {updateNameHandler(e.target.value)}}/>
 					</div>
 					<div className='flex justify-center mt-8'>
 						{state.current.tags.map((tag, index) => (
@@ -196,7 +214,7 @@ const Contents = () => {
 			{state.current && state.current.blocks.map((block, index) => {
 				if (block.tag === 'HEADER') {
 					return (
-						<HeaderEditableBlock block={block} className='mt-8' />
+						<HeaderEditableBlock block={block} className='mt-8' updateBlockHandler={(block) => updateBlockHandler(block)} />
 					)
 				}
 				if (block.tag === 'GALLERY') {
@@ -206,12 +224,16 @@ const Contents = () => {
 				}
 				if (block.tag === 'HEIGHT') {
 					return (
-						<HeightEditableBlock block={block} className='mt-8' />
+						<HeightEditableBlock
+							block={block}
+							className='mt-8'
+							updateBlockHandler={(block) => updateBlockHandler(block)}
+						/>
 					)
 				}
 				if (block.tag === 'WEIGHT') {
 					return (
-						<WeightEditableBlock block={block} className='mt-8' />
+						<WeightEditableBlock block={block} className='mt-8' updateBlockHandler={(block) => updateBlockHandler(block)} />
 					)
 				}
 				if (block.tag === 'URL') {
@@ -240,7 +262,7 @@ const Contents = () => {
 				}
 				if (block.tag === 'MEET') {
 					return (
-						<MeetEditableBlock block={block} className='mt-8' />
+						<MeetEditableBlock block={block} className='mt-8' updateBlockHandler={(block) => updateBlockHandler(block)}/>
 					)
 				}
 			})}

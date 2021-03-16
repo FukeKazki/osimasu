@@ -5,14 +5,20 @@ import { HeaderBlock } from '../../../lib/data'
 
 type Props = {
 	block: HeaderBlock
+	updateBlockHandler: (block) => void
 	className?: string
 }
 
-const HeaderEditableBlock: React.FC<Props> = ({ block, className }) => {
+const HeaderEditableBlock: React.FC<Props> = ({ block, className, updateBlockHandler }) => {
 	const [html, setHtml] = useState(block.html)
 
 	const handleChange = (e) => {
 		setHtml(e.target.value)
+		updateBlockHandler({
+			id: block.id,
+			tag: block.tag,
+			html: e.target.value,
+		})
 	}
 
 	return (

@@ -9,12 +9,13 @@ type Props = {
 	image: string
 	title: string
 	tags: string[]
+	id: string
 	className?: string
 }
 
-const CardM: React.FC<Props> = ({ image, title, tags, className, ...props }) => {
+const CardM: React.FC<Props> = ({ image, title, tags, id, className, ...props }) => {
 	return (
-		<article className={['relative border rounded-2xl overflow-hidden', className].join(' ')} {...props}>
+		<article className={['relative border rounded-2xl overflow-hidden border-gray', className].join(' ')} {...props}>
 			{/* 画像 */}
 			<div>
 				<img src={image} alt='' className='w-full h-40' />
@@ -31,8 +32,11 @@ const CardM: React.FC<Props> = ({ image, title, tags, className, ...props }) => 
 				</div>
 			</div>
 			{/*	リンク */}
-			<div className='absolute bottom-2 right-2'>
-				<Link href={`/contents/${title}`}>
+			<div className='absolute bottom-2 right-2 text-gray'>
+				{/*<Link href={`/contents/${title}`}>*/}
+				{/*	<FontAwesomeIcon icon={faChevronRight} />*/}
+				{/*</Link>*/}
+				<Link href={`/contents/${id}`}>
 					<FontAwesomeIcon icon={faChevronRight} />
 				</Link>
 			</div>
