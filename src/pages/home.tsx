@@ -4,6 +4,7 @@ import { ModeContext } from '../lib/provider/displayMode'
 import Layout from '../components/Layout'
 import Header from '../components/Organisms/Header'
 import CardM from '../components/Organisms/CardM'
+import ListCard from '../components/Organisms/ListCard'
 
 // 仮データ
 import { data } from '../lib/data'
@@ -33,6 +34,7 @@ export default function Home() {
 							<CardM key={index} image={osi.image} title={osi.name} tags={osi.tags} />
 						)
 					})}
+					
 				</section>
 			</main>
 		</Layout>
