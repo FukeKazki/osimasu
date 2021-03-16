@@ -13,7 +13,7 @@ export type State = {
 }
 
 export const initialState: State = {
-	mode: 'GRID'
+	mode: 'LIST'
 }
 
 type Context = {

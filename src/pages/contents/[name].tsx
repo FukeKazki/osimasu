@@ -23,7 +23,8 @@ const Contents = () => {
 	useEffect(() => {
 		console.log('name: ', name,)
 		console.log(state)
-		dispatch({ type: 'GET_BY_NAME', payload: { name: name as string } })
+		// dispatch({ type: 'GET_BY_NAME', payload: { name: name as string } })
+		dispatch({ type: 'GET_BY_ID', payload: { id: name as string } })
 	}, [name])
 
 	// useEffect(() => {

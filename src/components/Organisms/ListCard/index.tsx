@@ -9,10 +9,11 @@ type Props = {
 	image: string
 	title: string
 	tags: string[]
+	id: string
 	className?: string
 }
 
-const ListCard: React.FC<Props> = ({ image, title, tags, className, ...props }) => {
+const ListCard: React.FC<Props> = ({ image, title, tags, id, className, ...props }) => {
 	return (
 		<article className={['flex justify-between center border-b-2  p-4 border-gray' ,className].join(' ')} {...props}>
 			{/* 画像 */}
@@ -29,7 +30,7 @@ const ListCard: React.FC<Props> = ({ image, title, tags, className, ...props }) 
 			</div>
 			{/*	リンク */}
 			<div className='flex items-center text-gray'>
-				<Link href={`/contents/${title}`}>
+				<Link href={`/contents/${id}`}>
 					<FontAwesomeIcon icon={faChevronRight} />
 				</Link>
 			</div>

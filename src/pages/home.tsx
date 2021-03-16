@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Head from 'next/head'
 import { ModeContext } from '../lib/provider/displayMode'
+import {OsiDataContext} from '../lib/provider/osiData'
 import Layout from '../components/Layout'
 import Header from '../components/Organisms/Header'
 import CardM from '../components/Organisms/CardM'
@@ -9,11 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListUl, faThLarge } from '@fortawesome/free-solid-svg-icons'
 
 // 仮データ
-import { data } from '../lib/data'
+// import { data } from '../lib/data'
 
 export default function Home() {
 	// 表示モード: GRID, LIST, MAP
 	const { state, dispatch } = useContext(ModeContext)
+	const osiContext = useContext(OsiDataContext)
+	const data = osiContext.state.data
 	console.log(state)
 
 	return (
@@ -24,7 +27,7 @@ export default function Home() {
 			</Head>
 
 			{/*	Header */}
-			<Header title={'推しコレ'} className='container' />
+			<Header title={'推しコレ'} className='container' addHandler={() => osiContext.dispatch({type: 'ADD'})} />
 
 			{/*	Main */}
 			<main>
@@ -38,7 +41,7 @@ export default function Home() {
 					<section className='container grid grid-cols-2 gap-2 mt-4'>
 						{data.map((osi, index) => {
 							return (
-								<CardM key={index} image={osi.image} title={osi.name} tags={osi.tags} />
+								<CardM key={index} image={osi.image} title={osi.name} tags={osi.tags} id={osi.id} />
 							)
 						})}
 					</section>
@@ -47,7 +50,7 @@ export default function Home() {
 					<section className='mt-4'>
 						{data.map((osi, index) => {
 							return (
-								<ListCard key={index} image={osi.image} title={osi.name} tags={osi.tags} className={[!index && 'border-t-2'].join(' ')}/>
+								<ListCard key={index} image={osi.image} title={osi.name} tags={osi.tags} id={osi.id} className={[!index && 'border-t-2'].join(' ')}/>
 							)
 						})}
 					</section>

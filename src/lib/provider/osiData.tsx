@@ -8,6 +8,11 @@ export const getDataByName = (data: osi[], name: string): osi => {
 }
 
 export type Action = {
+	type: 'GET_BY_ID',
+	payload: {
+		id: string
+	}
+} | {
 	type: 'GET_BY_NAME',
 	payload: {
 		name: string
@@ -57,6 +62,11 @@ const reducer = (state: State, action: Action) => {
 				...state,
 				current: state.data.find(v => v.name === action.payload.name)
 			}
+		case 'GET_BY_ID':
+			return {
+				...state,
+				current: state.data.find(v => v.id === action.payload.id)
+			}
 		case 'UPDATE_BY_NAME':
 			console.log(state)
 			return {
@@ -75,11 +85,11 @@ const reducer = (state: State, action: Action) => {
 				name: '名称未確定',
 				tags: [],
 				image: 'https://placehold.jp/400x400.png',
-				blocks: [{id: 'aaa', tag: 'COMMAND', command: ''},],
+				blocks: [{ id: 'aaa', tag: 'COMMAND', command: '' }]
 			}
 			return {
 				...state,
-				data: [...state.data, newData]
+				data: [newData, ...state.data]
 			}
 		default:
 			return state
