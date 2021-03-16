@@ -15,9 +15,9 @@ const Header: React.FC<Props> = ({ title, className, ...props }) => {
 					className="flex-initial h-10 w-10 my-1"
 				/>
 				<div className="flex-initial text-xl py-2">
-					<h1>{title}</h1>
+					<h1 className='font-bold'>{title}</h1>
 				</div>
-			</div>			
+			</div>
 		</header>
 	)
 }

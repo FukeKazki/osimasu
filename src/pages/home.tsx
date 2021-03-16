@@ -5,6 +5,8 @@ import Layout from '../components/Layout'
 import Header from '../components/Organisms/Header'
 import CardM from '../components/Organisms/CardM'
 import ListCard from '../components/Organisms/ListCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faListUl, faThLarge } from '@fortawesome/free-solid-svg-icons'
 
 // 仮データ
 import { data } from '../lib/data'
@@ -12,6 +14,7 @@ import { data } from '../lib/data'
 export default function Home() {
 	// 表示モード: GRID, LIST, MAP
 	const { state, dispatch } = useContext(ModeContext)
+	console.log(state)
 
 	return (
 		<Layout>
@@ -21,21 +24,34 @@ export default function Home() {
 			</Head>
 
 			{/*	Header */}
-			<Header title={'header'} className='container' />
+			<Header title={'推しコレ'} className='container' />
 
 			{/*	Main */}
 			<main>
 				{/*	Navigation */}
-
-				{/*	Cards */}
-				<section className='container grid grid-cols-2 gap-2'>
-					{data.map((osi, index) => {
-						return (
-							<CardM key={index} image={osi.image} title={osi.name} tags={osi.tags} />
-						)
-					})}
-					
+				<section className='container flex justify-end text-pink'>
+					<FontAwesomeIcon icon={faListUl} size={'lg'} onClick={() => dispatch({type: 'LIST'})} />
+					<FontAwesomeIcon icon={faThLarge} size={'lg'} className='ml-4' onClick={() => dispatch({type: 'GRID'})} />
 				</section>
+				{/*	Cards */}
+				{state.mode === 'GRID' && (
+					<section className='container grid grid-cols-2 gap-2 mt-4'>
+						{data.map((osi, index) => {
+							return (
+								<CardM key={index} image={osi.image} title={osi.name} tags={osi.tags} />
+							)
+						})}
+					</section>
+				)}
+				{state.mode === 'LIST' && (
+					<section className='mt-4'>
+						{data.map((osi, index) => {
+							return (
+								<ListCard key={index} image={osi.image} title={osi.name} tags={osi.tags} className={[!index && 'border-t-2'].join(' ')}/>
+							)
+						})}
+					</section>
+				)}
 			</main>
 		</Layout>
 	)
