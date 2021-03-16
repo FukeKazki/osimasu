@@ -45,7 +45,7 @@ export type State = {
 }
 
 export const initialState: State = {
-	data: data,
+	data: [],
 	current: {
 		id: 'b',
 		name: 'ぽよ',
