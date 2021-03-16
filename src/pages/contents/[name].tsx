@@ -191,9 +191,11 @@ const Contents = () => {
 				<>
 					<div className='h-96 w-full bg-cover' style={{ backgroundImage: `url(${state.current.image})`}}>
 						<header className='container flex justify-between'>
-							<Link href='/home/'>
-								<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20' />
-							</Link>
+							<div onClick={() => dispatch({type: 'UPLOAD_DATA', payload: {data: state.current}})}>
+								<Link href='/home/'>
+									<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20' />
+								</Link>
+							</div>
 							<ImageSelectIcon handleChange={imageLoadHandler}/>
 						</header>
 					</div>

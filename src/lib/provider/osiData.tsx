@@ -1,7 +1,7 @@
-import { createContext, Dispatch, useReducer } from 'react'
+import { createContext, Dispatch, useEffect, useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { osi, data } from '../data'
-
+import { Firebase } from '../../firebase/database'
 
 export const getDataByName = (data: osi[], name: string): osi => {
 	return data.find(object => object.name === name)
@@ -25,6 +25,18 @@ export type Action = {
 	}
 } | {
 	type: 'ADD',
+} | {
+	type: 'FETCH_DATA',
+} | {
+	type: 'FETCH_DATA_SUCCESS',
+	payload: {
+		data: osi[]
+	}
+} | {
+	type: 'UPLOAD_DATA',
+	payload: {
+		data: osi
+	}
 }
 
 export type State = {
@@ -90,6 +102,19 @@ const reducer = (state: State, action: Action) => {
 				...state,
 				data: [newData, ...state.data]
 			}
+		case 'FETCH_DATA':
+			return {
+				...state,
+				data: [],
+			}
+		case 'FETCH_DATA_SUCCESS':
+			return {
+				...state,
+				data: action.payload.data,
+			}
+		case 'UPLOAD_DATA':
+			console.log('このデータをアップロードします', action.payload.data)
+			Firebase.uploadData(action.payload.data)
 		default:
 			return state
 	}
@@ -97,6 +122,16 @@ const reducer = (state: State, action: Action) => {
 
 export const OsiDataProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
+
+	useEffect(() => {
+		const res = Firebase.imagesCollection().get().then(res => {
+			return res.docs.map(value => value.data())
+		}).then(res => {
+			console.log('firebase data!')
+			console.log(res)
+			dispatch({type: 'FETCH_DATA_SUCCESS', payload: {data: res as osi[]}})
+		})
+	}, [])
 
 	return (
 		<OsiDataContext.Provider value={{ state, dispatch }}>
