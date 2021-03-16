@@ -16,6 +16,7 @@ import MeetEditableBlock from '../../components/Organisms/MeetEditableBlock'
 import ImageSelectIcon from '../../components/Molecules/ImageSelectIcon'
 import ContentEditable from 'react-contenteditable'
 import { v4 as uuidv4 } from 'uuid'
+import {Firebase} from '../../firebase/database'
 
 const Contents = () => {
 	const router = useRouter()
@@ -37,9 +38,12 @@ const Contents = () => {
 		const file = e.target.files.item(0)
 		const reader = new FileReader()
 		reader.readAsDataURL(file)
-		reader.onload = () => {
-			updateImageHandler(reader.result as string)
+		reader.onload = async () => {
+			// updateImageHandler(reader.result as string)
 			// setThumbnail(reader.result)
+			const url = await Firebase.uploadImage(reader.result as string)
+			console.log(url)
+			updateImageHandler(url)
 		}
 	}
 
