@@ -4,14 +4,20 @@ import { WeightBlock } from '../../../lib/data'
 
 type Props = {
 	block: WeightBlock
+	updateBlockHandler: (block) => void
 	className?: string
 }
 
-const WeightEditableBlock: React.FC<Props> = ({ block, className }) => {
+const WeightEditableBlock: React.FC<Props> = ({ block, className, updateBlockHandler }) => {
 	const [html, setHtml] = useState(block.weight)
 
 	const handleChange = (e) => {
 		setHtml(e.target.value)
+		updateBlockHandler({
+			id: block.id,
+			tag: block.tag,
+			weight: e.target.value,
+		})
 	}
 
 

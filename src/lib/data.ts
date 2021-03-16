@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export type Tags = [
 	'HEADER',
 	'GALLERY',
@@ -70,15 +72,15 @@ export type osi = {
 
 export const data: osi[] = [
 	{
-		id: 'a',
+		id: uuidv4(),
 		name: '大園桃子',
 		tags: ['アイドル', '乃木坂'],
 		image: 'https://thetv.jp/i/nw/1017396/10153976.jpg?w=615',
 		blocks: [
-			{id: 'c', tag: 'HEIGHT', height: '100'},
-			{id: 'ava', tag: 'COMMAND', command: ''},
-			{id: 'd', tag: 'WEIGHT', weight: '40'},
-			{id: 'aaa', tag: 'COMMAND', command: ''},
+			{id: uuidv4(), tag: 'HEIGHT', height: '100'},
+			{id: uuidv4(), tag: 'COMMAND', command: ''},
+			{id: uuidv4(), tag: 'WEIGHT', weight: '40'},
+			{id: uuidv4(), tag: 'COMMAND', command: ''},
 			// {id: 'e', tag: 'GALLERY', images: ['https://www.nogizaka46.com/smph/member/img/oozonomomoko_prof.jpg','','','','','','','']},
 			// {id: 'aac', tag: 'COMMAND', command: ''},
 		],
@@ -88,27 +90,27 @@ export const data: osi[] = [
 		name: '大谷映美里',
 		tags: ['アイドル', '=LOVE'],
 		image: 'https://pics.prcm.jp/dd4d0e22774bf/83761604/jpeg/83761604_220x275.jpeg',
-		blocks: [{id: 'aaa', tag: 'COMMAND', command: ''},],
+		blocks: [{id: uuidv4(), tag: 'COMMAND', command: ''},],
 	},
 	{
 		id: 'c',
 		name: '与田祐希',
 		tags: ['アイドル', '乃木坂'],
 		image: 'https://thetv.jp/i/nw/1017396/10153976.jpg?w=615',
-		blocks: [{id: 'aaa', tag: 'COMMAND', command: ''},],
+		blocks: [{id: uuidv4(), tag: 'COMMAND', command: ''},],
 	},
 	{
 		id: 'd',
 		name: '山下美月',
 		tags: ['アイドル', '=LOVE'],
 		image: 'https://pics.prcm.jp/dd4d0e22774bf/83761604/jpeg/83761604_220x275.jpeg',
-		blocks: [{id: 'aaa', tag: 'COMMAND', command: ''},],
+		blocks: [{id: uuidv4(), tag: 'COMMAND', command: ''},],
 	},
 	{
 		id: 'e',
 		name: 'ああ',
 		tags: [],
 		image: 'https://placehold.jp/400x400.png',
-		blocks: [{id: 'aaa', tag: 'COMMAND', command: ''},],
+		blocks: [{id: uuidv4(), tag: 'COMMAND', command: ''},],
 	}
 ]

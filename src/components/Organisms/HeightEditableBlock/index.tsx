@@ -4,14 +4,20 @@ import { HeightBlock } from '../../../lib/data'
 
 type Props = {
 	block: HeightBlock
+	updateBlockHandler: (block) => void
 	className?: string
 }
 
-const HeightEditableBlock: React.FC<Props> = ({ block, className }) => {
+const HeightEditableBlock: React.FC<Props> = ({ block, updateBlockHandler,  className }) => {
 	const [html, setHtml] = useState(block.height)
 
 	const handleChange = (e) => {
 		setHtml(e.target.value)
+		updateBlockHandler({
+			id: block.id,
+			tag: 'HEIGHT',
+			height: e.target.value
+		})
 	}
 
 

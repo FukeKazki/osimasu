@@ -20,7 +20,6 @@ export type Action = {
 } | {
 	type: 'UPDATE_BY_NAME',
 	payload: {
-		name: string,
 		id: string,
 		data: osi,
 	}

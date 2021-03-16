@@ -4,14 +4,20 @@ import ContentEditable from 'react-contenteditable'
 
 type Props = {
 	block: MeetBlock
+	updateBlockHandler: (block) => void
 	className?: string
 }
 
-const MeetEditableBlock: React.FC<Props> = ({ block, className}) => {
+const MeetEditableBlock: React.FC<Props> = ({ block, className, updateBlockHandler}) => {
 	const [html, setHtml] = useState(block.meet)
 
 	const handleChange = (e) => {
 		setHtml(e.target.value)
+		updateBlockHandler({
+			id: block.id,
+			tag: block.tag,
+			meet: e.target.value,
+		})
 	}
 
 
