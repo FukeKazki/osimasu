@@ -22,14 +22,14 @@ const ListCard: React.FC<Props> = ({ image, title, tags, id, className, ...props
 			</div>
 			<div className='flex-initial w-1/2'>
 				{/* 名前 */}
-				<p className="text-xl">{title}</p>
+				<p className="text-xl text-black">{title}</p>
 				{/*	タグ一覧 */}
 				{tags.map((tag, index) => (
 					<span className={['text-sm', index && 'ml-2'].join(' ')}>{tag}</span>
 				))}
 			</div>
 			{/*	リンク */}
-			<div className='flex items-center text-gray'>
+			<div className='flex items-center text-gray cursor-pointer'>
 				<Link href={`/contents/${id}`}>
 					<FontAwesomeIcon icon={faChevronRight} />
 				</Link>

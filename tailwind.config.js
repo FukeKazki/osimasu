@@ -16,6 +16,9 @@ module.exports = {
 			},
 			gray: {
 				DEFAULT: '#cec0c1',
+			},
+			black: {
+				DEFAULT: '#22111C'
 			}
 		},
 		extend: {}

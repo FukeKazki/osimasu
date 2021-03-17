@@ -197,10 +197,10 @@ const Contents = () => {
 						<header className='container flex justify-between'>
 							<div onClick={() => dispatch({type: 'UPLOAD_DATA', payload: {data: state.current}})}>
 								<Link href='/home/'>
-									<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20' />
+									<FontAwesomeIcon icon={faChevronLeft} className='text-white h-20 w-20 cursor-pointer' />
 								</Link>
 							</div>
-							<ImageSelectIcon handleChange={imageLoadHandler}/>
+							<ImageSelectIcon handleChange={imageLoadHandler} className='cursor-pointer'/>
 						</header>
 					</div>
 					<div className='mt-8'>

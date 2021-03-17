@@ -23,7 +23,7 @@ const CardM: React.FC<Props> = ({ image, title, tags, id, className, ...props })
 
 			<div className='p-4'>
 				{/* 名前 */}
-				<p className='text-3xl'>{title}</p>
+				<p className='text-3xl text-black'>{title}</p>
 				{/*	タグ一覧 */}
 				<div>
 					{tags.map((tag, index) => (
@@ -32,7 +32,7 @@ const CardM: React.FC<Props> = ({ image, title, tags, id, className, ...props })
 				</div>
 			</div>
 			{/*	リンク */}
-			<div className='absolute bottom-2 right-2 text-gray'>
+			<div className='absolute bottom-2 right-2 text-gray cursor-pointer'>
 				{/*<Link href={`/contents/${title}`}>*/}
 				{/*	<FontAwesomeIcon icon={faChevronRight} />*/}
 				{/*</Link>*/}

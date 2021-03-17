@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ title, className, addHandler, ...props }) => 
 				<div className="flex-initial text-xl py-2">
 					<h1 className='font-bold'>{title}</h1>
 				</div>
-				<div className='text-pink absolute top-3 right-4' onClick={addHandler}>
+				<div className='text-pink absolute top-3 right-4 cursor-pointer' onClick={addHandler}>
 					<FontAwesomeIcon icon={faPlus} size='lg'/>
 				</div>
 			{/*</div>*/}
