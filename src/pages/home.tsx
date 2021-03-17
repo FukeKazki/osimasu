@@ -33,8 +33,8 @@ export default function Home() {
 			<main>
 				{/*	Navigation */}
 				<section className='container flex justify-end text-pink'>
-					<FontAwesomeIcon icon={faListUl} size={'lg'} onClick={() => dispatch({type: 'LIST'})} />
-					<FontAwesomeIcon icon={faThLarge} size={'lg'} className='ml-4' onClick={() => dispatch({type: 'GRID'})} />
+					<FontAwesomeIcon icon={faListUl} size={'lg'} onClick={() => dispatch({type: 'LIST'})} className='cursor-pointer' />
+					<FontAwesomeIcon icon={faThLarge} size={'lg'} className='ml-4 cursor-pointer' onClick={() => dispatch({type: 'GRID'})} />
 				</section>
 				{/*	Cards */}
 				{state.mode === 'GRID' && (
