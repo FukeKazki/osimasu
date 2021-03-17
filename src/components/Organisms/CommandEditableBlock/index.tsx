@@ -77,8 +77,11 @@ const CommandEditableBlock: React.FC<Props> = ({
 		const encodedUrl = encodeURIComponent(url)
 		const res = await fetch(`/api/${encodedUrl}`)
 		const content = await res.json()
+		const title = content.title ? content.title : ''
+		const description = content.description ? content.description : ''
+		const image = content.image ? content.image : ''
 
-		addUrlBlockHandler(index, url, content.title, content.description, content.image)
+		addUrlBlockHandler(index, url, title, description, image)
 		setCommand('')
 	}
 
