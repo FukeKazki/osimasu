@@ -27,7 +27,7 @@ export default function Home() {
 			</Head>
 
 			{/*	Header */}
-			<Header title={'推しコレ'} className='container' addHandler={() => osiContext.dispatch({type: 'ADD'})} />
+			<Header title={'推しマス'} className='container' addHandler={() => osiContext.dispatch({type: 'ADD'})} />
 
 			{/*	Main */}
 			<main>
