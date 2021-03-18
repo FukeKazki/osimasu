@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 
-type Props = {
+export type Props = {
 	image: string
 	title: string
 	tags: string[]

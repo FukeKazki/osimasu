@@ -269,7 +269,7 @@ const Contents = () => {
 				}
 				if (block.tag === 'URL') {
 					return (
-						<div className='container'>
+						<div className='container mt-8'>
 							<UrlContainer
 								title={block.title}
 								description={block.description}
