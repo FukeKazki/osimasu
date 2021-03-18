@@ -34,17 +34,45 @@ const Contents = () => {
 	// 	addCommandBlockHandler(state.current.blocks.length)
 	// }, [state.current.blocks])
 
-	const imageLoadHandler = async (e) => {
+	const imageLoadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files.item(0)
+		if (file === null) return undefined
+
+		const base64_image = await readImageAdDataUrl(file)
+			.catch(error => {
+				if (error instanceof DOMException) {
+					window.alert('読込に失敗しました')
+					// デフォルトの画像urlなどを返すといいかも
+					return ''
+				} else {
+					throw error
+				}
+			})
+
+		const url = await Firebase.uploadImage(base64_image as string)
+
+		updateImageHandler(url)
+
+
+	}
+
+	const readImageAdDataUrl = (file: File): Promise<string | ArrayBuffer> => {
 		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onload = async () => {
-			// updateImageHandler(reader.result as string)
-			// setThumbnail(reader.result)
-			const url = await Firebase.uploadImage(reader.result as string)
-			console.log(url)
-			updateImageHandler(url)
-		}
+
+		return new Promise((resolve, reject) => {
+			// エラー時
+			reader.onerror = () => {
+				// 読込処理を中断
+				reader.abort()
+				reject(reader.error)
+			}
+			// 正常時
+			reader.onload = () => {
+				resolve(reader.result)
+			}
+
+			reader.readAsDataURL(file)
+		})
 	}
 
 
@@ -160,8 +188,7 @@ const Contents = () => {
 		})
 	}
 
-	const updateImageHandler = (image: string) => {
-		console.log(image)
+	const updateImageHandler = (image: string | ArrayBuffer) => {
 		dispatch({
 			type: 'UPDATE_BY_NAME',
 			payload: {
@@ -242,7 +269,7 @@ const Contents = () => {
 				}
 				if (block.tag === 'URL') {
 					return (
-						<div className='container'>
+						<div className='container mt-8'>
 							<UrlContainer
 								title={block.title}
 								description={block.description}

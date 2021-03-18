@@ -66,7 +66,7 @@ export type osi = {
 	id: string
 	name: string
 	tags: string[]
-	image: string
+	image: string | ArrayBuffer
 	blocks: block[]
 }
 
