@@ -56,7 +56,7 @@ const Contents = () => {
 
 	}
 
-	const readImageAdDataUrl = (file: File): Promise<string | ArrayBuffer> => {
+	const readImageAdDataUrl = (file: File): Promise<string> => {
 		const reader = new FileReader()
 
 		return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ const Contents = () => {
 			}
 			// 正常時
 			reader.onload = () => {
-				resolve(reader.result)
+				resolve(reader.result as string)
 			}
 
 			reader.readAsDataURL(file)
@@ -188,7 +188,7 @@ const Contents = () => {
 		})
 	}
 
-	const updateImageHandler = (image: string | ArrayBuffer) => {
+	const updateImageHandler = (image: string) => {
 		dispatch({
 			type: 'UPDATE_BY_NAME',
 			payload: {
