@@ -47,7 +47,7 @@ export default function Particle({ result }) {
 		<div>
 			<div className='flex justify-center place-items-center h-16 shadow sticky top-0 bg-white mx-auto'>
 				<form onSubmit={handleSubmit}>
-					<input type='text' placeholder='ドラゴン' value={query} onChange={e => setQuery(e.target.value)} />
+					<input type='text' placeholder='anime' value={query} onChange={e => setQuery(e.target.value)} />
 					<input type='submit' value='検索'/>
 				</form>
 			</div>
@@ -55,13 +55,14 @@ export default function Particle({ result }) {
 			<div className='container mt-8 mx-auto'>
 				<div className='shadow p-4 rounded-2xl'>
 					<h3 className='text-center'>えっちな動画を探していることがバレにくいサイトです</h3>
-					<p className='text-center mt-4 text-lg'>特徴</p>
+					<p className='text-sm text-center'>※英語で検索するとヒットしやすいです</p>
+					<p className='text-center mt-4 text-lg font-bold'>特徴</p>
 					<ul>
 						<li>
-							<p>1. 履歴に残ってもURLからわからない</p>
+							<p className='md:text-center'>1. 履歴に残ってもURLからわからない</p>
 						</li>
 						<li>
-							<p>2. 画像が無いので画面を見られても一瞬ではわからない</p>
+							<p className='md:text-center'>2. 画像が無いので画面を見られても一瞬ではわからない</p>
 						</li>
 					</ul>
 				</div>
@@ -72,7 +73,7 @@ export default function Particle({ result }) {
 				{videos.map(video => {
 					return (
 						<li key={video.video_id} className='border-b border-pink-light p-4'>
-							<a href={video.url}>
+							<a href={video.url} target='_blank'>
 								<p className='text-lg text-pink-dark'>{video.title}</p>
 								<div className='flex flex-wrap'>
 									{video.tags.map(tags => <p className='text-sm ml-1'>{tags.tag_name}</p>)}
