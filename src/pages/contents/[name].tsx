@@ -230,6 +230,7 @@ const Contents = () => {
 							<ImageSelectIcon handleChange={imageLoadHandler} className='cursor-pointer'/>
 						</header>
 					</div>
+					<p>" / "を入力すると様々なコンテンツがでてくるよ!</p>
 					<div className='mt-8'>
 						{/*<h1 className='text-5xl font-bold text-center'>{state.current.name}</h1>*/}
 						<ContentEditable className='text-5xl font-bold text-center' html={state.current.name} onChange={(e) => {updateNameHandler(e.target.value)}}/>
